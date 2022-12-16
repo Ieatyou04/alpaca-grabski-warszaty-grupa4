@@ -12,7 +12,6 @@ const ctx = canvas.getContext('2d');
 function clearCanvas() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
-
 /**
  * @description This function draws image asynchronously.
  * @param {string} src Relative or absolute path to file
@@ -21,13 +20,13 @@ function clearCanvas() {
  * @param {number} scale Parameter used for scaling of drawn image (1 results in original size).
  * @returns {Promise} Promise that is fulfilled when the image is loaded and drawn.
  */
-function drawImage(src, x, y, scale) {
-	const image = new Image();
-	image.src = src;
-    return new Promise((resolve) => {
-        image.onload = async () => {
-            ctx.drawImage(image, x, y, image.width * scale, image.height * scale);
-            resolve();
-        };
-    });
-}
+            (src, x, y, scale) => {
+                const image = new Image();
+                image.src = src;
+                return new Promise((resolve) => {
+                    image.onload = async () => {
+                        ctx.drawImage(image, x, y, image.width * scale, image.height * scale);
+                        resolve();
+                    };
+                });
+            }
